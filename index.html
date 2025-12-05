@@ -1,182 +1,446 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Travel Smart — Home</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script src="https://kit.fontawesome.com/747f67b7cc.js" crossorigin="anonymous"></script>
-  <style>
-
-    li{
-      color: black;
-    }
-.slideshow-container {
-        width: 80%;
-        position: relative;
-        overflow: hidden;
-        margin-left: 50px;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WanderLust Travels - Your Journey Begins Here</title>
+    <link rel="shortcut icon" href="assets/home.jpg" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         
-    }
-    .slideshow {
-        display: flex;
-        transition: transform 0.5s ease;
-        align-items: center;
-        justify-content: space-around;
-    }
-    .slide {
-        min-width: 100%;
-        box-sizing: border-box;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        height: 100px;
-        gap: 20px; /* Space between images */
-        margin-left: 30px;
-        border-radius: 25px;
-    }
-    .slide img {
-        max-height: 80px;
-        max-width: 180px;
-        object-fit: contain;
-        padding: 0; /* Removed padding to avoid extra space */
-        border-radius: 12px;
-    }
-    
-  </style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        nav a:hover {
+            opacity: 0.8;
+        }
+        
+        .hero {
+            background: url("assets/img.jpg");
+            height: 90vh;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 2rem;
+            text-align: center;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .search-box {
+            background: transparent;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .search-box input {
+            width: 100%;
+            background-color: transparent;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .search-box button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+        
+        .search-box button:hover {
+            transform: scale(1.05);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .section {
+            padding: 4rem 0;
+        }
+        
+        .section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #667eea;
+        }
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .card-image {
+            width: 100%;
+            height: 200px;
+            background: url("assets/mountain.jpg");
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .card-image2{
+          width: 100%;
+            height: 200px;
+            background: url("assets/maldives.jpeg");
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+        .card-image3{
+          width: 100%;
+            height: 200px;
+            background: url("assets/mountain.jpg");
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .card button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .card button:hover {
+            background: #764ba2;
+        }
+        
+        .features {
+            background: #f8f9fa;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+        
+        footer {
+            background: #333;
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        footer h4 {
+            margin-bottom: 1rem;
+        }
+        
+        footer ul {
+            list-style: none;
+        }
+        
+        footer a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        footer a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #555;
+            color: #bbb;
+        }
+    </style>
 </head>
-<body background="assets/home.jpg">
-  <header class="header">
-    <div class="container inner">
-      <div class="logo" onclick="location.href='index.html'">
-        <div class="icon">TS</div><div>TRAVEL <strong>SMART</strong></div>
-      </div>
-      <nav class="nav">
-        <a class="btn" href="catalog.html">Destinations</a>
-        <a class="btn" href="about.html">About</a>
-        <a class="btn" href="contact.html">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container" style="padding-top:20px">
-    <section class="hero" style="position:relative;">
-      <div class="content">
-        <h1>Find your next adventure with <span style="color:#fff;font-weight:800">Travel Smart</span></h1>
-        <p>Search tours, activities, and destinations</p>
-
-        <div class="searchbar" style="margin-top:18px;">
-          <input id="globalSearch" placeholder='Search (e.g. "beach", "trek", "Tokyo")'>
-          <button onclick="if(document.getElementById('globalSearch').value.trim()){ location.href='catalog.html?query='+encodeURIComponent(document.getElementById('globalSearch').value.trim()); }">Search</button>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">✈️ Travel Smart</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="catalog.html">Destinations</a></li>
+                <li><a href="feedback.html">Packages</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Explore the World</h1>
+        <p>Discover amazing destinations and unforgettable experiences</p>
+        <div class="search-box">
+            <input type="text" placeholder="Where do you want to go?">
+            <button>Search Trips</button>
         </div>
-
-        <div style="margin-top:16px;display:flex;gap:10px">
-          <a class="btn" href="catalog.html">Browse Catalog</a>
-          <a class="btn" href="feedback.html">Give Feedback</a>
-        </div>
-      </div>
-
-      <aside style="padding:28px; background-color:white;" class="card">
-        <h3 style="margin-top:0; color: black;">Featured packages:</h3>
-        <div class="small">Handpicked top tours for you</div>
-        <ul style="margin-top:12px">
-          <li><strong>Maldives Escape</strong> — 5 days • ⭐ 4.9</li>
-          <li><strong>Costa Rica</strong> — 7 days • ⭐ 4.8</li>
-          <li><strong>paris city</strong> — 5 days • ⭐ 4.7</li>
-        </ul>
-      </aside>
     </section>
-
-    <br>
-    <h2 style=font-weight:bolder; color: #1a252f;>TRAVELLING PARTNERS</h2>
-    <br>
-    <div class="slideshow-container">
-    <div class="slideshow" id="slideshow">
-        <div class="slide">
-            <a href="https://www.uber.com/in/en/" target="_blank"><img src="assets/uberlogo.png" alt="Partner 1"></a>
-            <a href="https://www.tcsexpress.com/" target="_blank"><img src="assets/tcslogo.png" alt="Partner 2"></a>
-            <a href="https://www.piac.com.pk/" target="_blank"><img src="assets/pialogo.png" alt="Partner 3"></a>
+    
+    <!-- Popular Destinations -->
+    <section class="section container" id="destinations">
+        <h2>Popular Destinations</h2>
+        <div class="cards">
+            <div class="card">
+                <div class="card-image">🏖️</div>
+                <div class="card-content">
+                    <h3>Maldives</h3>
+                    <p>Crystal clear waters and pristine white beaches await you in paradise.</p>
+                    <button>Explore</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-image2">🗼</div>
+                <div class="card-content">
+                    <h3>Paris, France</h3>
+                    <p>The city of love, art, and unforgettable memories with iconic landmarks.</p>
+                    <button>Explore</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-image3">🏔️</div>
+                <div class="card-content">
+                    <h3>Swiss Alps</h3>
+                    <p>Majestic mountains and charming villages for adventure seekers.</p>
+                    <button>Explore</button>
+                </div>
+            </div>
         </div>
-        <div class="slide">
-            <a href="https://www.efulife.com/" target="_blank"><img src="assets/efulogo.jpg" alt="Partner 4"></a>
-            <a href="https://www.flyjinnah.com/?gclsrc=aw.ds&gad_source=1&gad_campaignid=18663576626&gbraid=0AAAAAod6MNmYOvISOC8ZEAgV7S-cc3TgS&gclid=Cj0KCQjwzOvEBhDVARIsADHfJJRyMTnxnnpV-oNrjy79CYKc9xksUdiyTcqtuQ1NyTqF4f9pWfsG6jsaAoATEALw_wcB" target="_blank"><img src="assets/flyjin.svg" alt="Partner 5"></a>
-            <a href="https://www.kainattravels.com/" target="_blank"><img src="assets/kainat.jpg" alt="Partner 6"></a>
-        </div>
-
-        <div class="slide">
-            <a href="https://daewoo.com.pk/" target="_blank"><img src="assets/daewoo.jpg" alt="Partner 7"></a>
-            <a href="https://www.kfcpakistan.com/" target="_blank"><img src="assets/kfc.png" alt="Partner 8"></a>
-            <a href="https://mcdonalds.com.pk/" target="_blank"><img src="assets/mcdonald.png" alt="Partner 9"></a>
-        </div>
-        <br><br>
-
-        
-    </div>
-</div>
-
-    <section style="margin-top:26px" class="card">
-      <h3>Why Travel Smart?</h3>
-      <p class="small">Easy search, filter and sort to find tours matching your budget and taste. Leave feedback and reviews.</p>
     </section>
-  </main>
-
-    <footer class="footer" style="margin-top: 87px;">
-        <div class="footer-container">
-            <div class="footer-section">
-                <h4>Find us</h4>
-                <p>📍 office number 32 model colony karachi</p>
-                <p>📞 +92-9999878398</p>
-                <p>✉️ travel@smart.com.pk</p>
+    
+    <!-- Travel Packages -->
+    <section class="section container" id="packages">
+        <h2>Our Travel Packages</h2>
+        <div class="cards">
+            <div class="card">
+                <div class="card-image">🌴</div>
+                <div class="card-content">
+                    <h3>Beach Getaway</h3>
+                    <p><strong>$999</strong> - 5 Days</p>
+                    <p>Relax on sandy beaches with all-inclusive amenities.</p>
+                    <button>Book Now</button>
+                </div>
             </div>
-            
-            
-            <div class="footer-section">
-                <h4>Follow us</h4>
-                <ul>
-                    <li><a href="#"><i class="fa-brands fa-twitter"></i>  TravelSmart123</a></li>
-                    <li><a href="#"><i class="fa-brands fa-instagram"></i>  Travel_Smart</a></li>
-                </ul>
+            <div class="card">
+                <div class="card-image">🎒</div>
+                <div class="card-content">
+                    <h3>Adventure Tour</h3>
+                    <p><strong>$1,299</strong> - 7 Days</p>
+                    <p>Experience thrilling activities and explore hidden treasures.</p>
+                    <button>Book Now</button>
+                </div>
             </div>
+            <div class="card">
+                <div class="card-image">🍽️</div>
+                <div class="card-content">
+                    <h3>Culinary Journey</h3>
+                    <p><strong>$1,499</strong> - 6 Days</p>
+                    <p>Taste authentic cuisines and visit local food markets.</p>
+                    <button>Book Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features -->
+    <section class="section features">
+        <div class="container">
+            <h2>Why Choose Us?</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <div class="feature-icon">✅</div>
+                    <h3>Best Prices</h3>
+                    <p>Guaranteed lowest prices with flexible payment options.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Safe & Secure</h3>
+                    <p>Your bookings and personal data are always protected.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">👥</div>
+                    <h3>Expert Guides</h3>
+                    <p>Professional tour guides to make your trip memorable.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Global Coverage</h3>
+                    <p>Access to destinations across all continents.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h4>About Us</h4>
+                    <p>WanderLust is your trusted travel partner for unforgettable journeys worldwide.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">Destinations</a></li>
+                        <li><a href="#">Packages</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li>📧 info@wanderlust.com</li>
+                        <li>📞 +1 (555) 123-4567</li>
+                        <li>📍 123 Travel St, City, Country</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Follow Us</h4>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">YouTube</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="catalog.html">Destinations</a>
-            <a href="contact.html">Contact</a>
-            <a href="feedback.html">Feedback</a>
-            <a href="review.html">Review</a>
-            <p>Copyright ©2025 | Designed by M & M | Privcy Policy</p>
-            <div class="social-icons">
-                <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://x.com/" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.linkedin.com/home/?originalSubdomain=pk" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
-            </div>
+            <p>&copy; 2024 WanderLust Travels. All rights reserved.</p>
         </div>
     </footer>
-   <script>
-    let slideIndex = 0;
-    const slides = document.getElementsByClassName("slide");
-    const totalSlides = slides.length;
-
-    function showSlides() {
-        if (slideIndex >= totalSlides) slideIndex = 0;
-        if (slideIndex < 0) slideIndex = totalSlides - 1;
-        const offset = -slideIndex * 100;
-        document.getElementById("slideshow").style.transform = `translateX(${offset}%)`;
-    }
-
-    function nextSlide() {
-        slideIndex++;
-        showSlides();
-    }
-
-    // Auto slide every 3 seconds
-    setInterval(nextSlide, 3000);
-
-    // Initial call to show the first slide
-    showSlides();
-</script>
 </body>
 </html>
-    
