@@ -1,71 +1,566 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Travel Smart — Details</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="View detailed information about your travel destination. See itinerary, pricing, and book your trip.">
+  <title>Travel Smart - Destination Details</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <script src="https://kit.fontawesome.com/747f67b7cc.js" crossorigin="anonymous"></script>
+  <style>
+    .details-hero-section {
+      position: relative;
+      height: 500px;
+      overflow: hidden;
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .details-hero-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .details-hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+    }
+    
+    .details-hero-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: var(--spacing-xl);
+      color: white;
+      z-index: 1;
+    }
+    
+    .image-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .gallery-item {
+      position: relative;
+      aspect-ratio: 1;
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .gallery-item:hover {
+      transform: scale(1.05);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .details-layout {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: var(--spacing-xl);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .details-content {
+      background: var(--card);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+    
+    .details-content h2 {
+      color: var(--dark);
+      margin-bottom: var(--spacing-md);
+      padding-bottom: var(--spacing-md);
+      border-bottom: 2px solid var(--bg);
+    }
+    
+    .details-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+      padding-bottom: var(--spacing-lg);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      color: var(--muted);
+    }
+    
+    .meta-item i {
+      color: var(--primary);
+    }
+    
+    .booking-panel {
+      background: var(--card);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      position: sticky;
+      top: 100px;
+      height: fit-content;
+    }
+    
+    .price-display {
+      text-align: center;
+      margin-bottom: var(--spacing-lg);
+      padding-bottom: var(--spacing-lg);
+      border-bottom: 2px solid var(--bg);
+    }
+    
+    .price-amount {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .price-label {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    
+    .booking-form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-md);
+    }
+    
+    .booking-form input,
+    .booking-form select {
+      padding: 0.875rem;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+    
+    .booking-form input:focus,
+    .booking-form select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(14, 165, 161, 0.1);
+    }
+    
+    .itinerary-section {
+      margin-top: var(--spacing-xl);
+    }
+    
+    .itinerary-item {
+      background: var(--bg);
+      border-radius: var(--radius);
+      margin-bottom: var(--spacing-md);
+      overflow: hidden;
+    }
+    
+    .itinerary-header {
+      padding: var(--spacing-md);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: var(--transition);
+    }
+    
+    .itinerary-header:hover {
+      background: var(--card);
+    }
+    
+    .itinerary-header h4 {
+      margin: 0;
+      color: var(--dark);
+    }
+    
+    .itinerary-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      padding: 0 var(--spacing-md);
+    }
+    
+    .itinerary-item.active .itinerary-content {
+      max-height: 1000px;
+      padding: var(--spacing-md);
+    }
+    
+    .itinerary-icon {
+      transition: var(--transition);
+    }
+    
+    .itinerary-item.active .itinerary-icon {
+      transform: rotate(180deg);
+    }
+    
+    .map-section {
+      margin-top: var(--spacing-xl);
+    }
+    
+    .map-container {
+      width: 100%;
+      height: 400px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    @media (max-width: 1024px) {
+      .details-layout {
+        grid-template-columns: 1fr;
+      }
+      
+      .booking-panel {
+        position: static;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="header">
-    <div class="container inner">
+    <nav class="container inner">
       <div class="logo" onclick="location.href='index.html'">
-        <div class="icon">TS</div><div>TRAVEL <strong>SMART</strong></div>
+        <div class="icon">TS</div>
+        <div>TRAVEL <strong>SMART</strong></div>
       </div>
-      <nav class="nav">
-        <a class="btn" href="catalog.html">Destinations</a>
-        <a class="btn" href="review.html">Review</a>
-      </nav>
-    </div>
+      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav">
+        <li><a href="index.html" class="btn">Home</a></li>
+        <li><a href="catalog.html" class="btn">Destinations</a></li>
+        <li><a href="packages.html" class="btn">Packages</a></li>
+        <li><a href="about.html" class="btn">About</a></li>
+        <li><a href="contact.html" class="btn">Contact</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <main class="container" style="padding-top:20px">
+  <main class="container" style="padding-top: var(--spacing-lg);">
     <div id="detailsContent"></div>
   </main>
 
-  <footer class="footer" style="margin-top: 87px;">
-        <div class="footer-container">
-            <div class="footer-section">
-                <h4>Find us</h4>
-                <p>📍 office number 32 model colony karachi</p>
-                <p>📞 +92-9999878398</p>
-                <p>✉️ travel@smart.com.pk</p>
-            </div>
-            
-            
-            <div class="footer-section">
-                <h4>Follow us</h4>
-                <ul>
-                    <li><a href="#"><i class="fa-brands fa-twitter"></i>  TravelSmart123</a></li>
-                    <li><a href="#"><i class="fa-brands fa-instagram"></i>  Travel_Smart</a></li>
-                </ul>
-            </div>
-            </div>
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-section">
+          <h4>Find Us</h4>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> Office #32, Model Colony, Karachi</li>
+            <li><i class="fas fa-phone"></i> +92-9999878398</li>
+            <li><i class="fas fa-envelope"></i> travel@smart.com.pk</li>
+          </ul>
         </div>
-        <div class="footer-bottom">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="catalog.html">Destinations</a>
-            <a href="contact.html">Contact</a>
-            <a href="feedback.html">Feedback</a>
-            <a href="review.html">Review</a>
-            <p>Copyright ©2025 | Designed by M & M | Privcy Policy</p>
-            <div class="social-icons">
-                <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://x.com/" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.linkedin.com/home/?originalSubdomain=pk" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
-            </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="catalog.html">Destinations</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
         </div>
-    </footer>
+        <div class="footer-section">
+          <h4>Follow Us</h4>
+          <div class="social-icons">
+            <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://x.com/" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Travel Smart. All rights reserved. | Designed by M & M | <a href="#" style="color: rgba(255,255,255,0.7);">Privacy Policy</a></p>
+    </div>
+  </footer>
 
+  <script src="js/utils.js"></script>
   <script src="js/data.js"></script>
   <script src="js/site.js"></script>
   <script>
-    // run after load
-    document.addEventListener('DOMContentLoaded', ()=>{ renderDetails(); });
+    // Enhanced details rendering
+    function renderDetails() {
+      const el = document.getElementById('detailsContent');
+      if (!el) return;
+      
+      const params = new URLSearchParams(location.search);
+      const id = Number(params.get('id') || 0);
+      const p = (window.TRAVEL_DATA || []).find(x => x.id === id);
+      
+      if (!p) {
+        el.innerHTML = '<div class="card"><h2>Package not found</h2><p>Sorry, we couldn\'t find the package you\'re looking for.</p><a href="catalog.html" class="btn">Back to Catalog</a></div>';
+        return;
+      }
+      
+      // Sample itinerary data
+      const itineraries = {
+        1: [
+          { day: 'Day 1', title: 'Arrival & Welcome', content: 'Arrive at Malé International Airport. Transfer to your resort. Welcome dinner and orientation.' },
+          { day: 'Day 2', title: 'Snorkeling Adventure', content: 'Morning snorkeling session to explore vibrant coral reefs. Afternoon at leisure. Sunset cruise.' },
+          { day: 'Day 3', title: 'Island Hopping', content: 'Visit local islands, experience Maldivian culture, and enjoy water sports activities.' },
+          { day: 'Day 4', title: 'Relaxation & Spa', content: 'Full day at the resort. Enjoy spa treatments, beach activities, and fine dining.' },
+          { day: 'Day 5', title: 'Departure', content: 'Check out and transfer to airport for your flight home.' }
+        ],
+        3: [
+          { day: 'Day 1', title: 'Arrival in Istanbul', content: 'Arrive at Istanbul Airport. Transfer to hotel. Evening Bosphorus cruise with dinner.' },
+          { day: 'Day 2', title: 'Historic Sites', content: 'Visit Hagia Sophia, Blue Mosque, and Topkapi Palace. Explore Grand Bazaar.' },
+          { day: 'Day 3', title: 'Cultural Experience', content: 'Turkish cooking class, visit to Spice Bazaar, and traditional Turkish bath experience.' }
+        ],
+        5: [
+          { day: 'Day 1-2', title: 'Arrival & Acclimatization', content: 'Arrive in Kathmandu. Briefing and preparation. Acclimatization walks.' },
+          { day: 'Day 3-5', title: 'Trek to Base Camp', content: 'Begin trek through Sherpa villages. Gradual ascent with rest days for acclimatization.' },
+          { day: 'Day 6-8', title: 'Base Camp Exploration', content: 'Reach Everest Base Camp. Explore the area, visit Khumbu Icefall viewpoint.' },
+          { day: 'Day 9-10', title: 'Return Journey', content: 'Descend back to Lukla. Celebration dinner and cultural program.' }
+        ]
+      };
+      
+      const itinerary = itineraries[id] || [
+        { day: 'Day 1', title: 'Arrival', content: 'Arrive at destination and check into accommodation.' },
+        { day: 'Day 2', title: 'Exploration', content: 'Guided tour of main attractions and local experiences.' },
+        { day: 'Day 3', title: 'Activities', content: 'Enjoy planned activities and free time for personal exploration.' }
+      ];
+      
+      // Sample gallery images
+      const galleryImages = [
+        p.hero,
+        'assets/maldives.jpeg',
+        'assets/beach.jpeg',
+        'assets/mountain.jpg',
+        'assets/city.avif'
+      ];
+      
+      el.innerHTML = `
+        <!-- Hero Section -->
+        <div class="details-hero-section fade-in">
+          <img src="${p.hero}" alt="${p.name}" class="details-hero-image">
+          <div class="details-hero-overlay"></div>
+          <div class="details-hero-content">
+            <h1 style="color: white; margin-bottom: var(--spacing-sm); font-size: clamp(2rem, 5vw, 3.5rem);">${p.name}</h1>
+            <div style="display: flex; gap: var(--spacing-md); flex-wrap: wrap; color: rgba(255,255,255,0.9);">
+              <span><i class="fas fa-calendar"></i> ${p.duration} days</span>
+              <span><i class="fas fa-tag"></i> ${p.type.charAt(0).toUpperCase() + p.type.slice(1)}</span>
+              <span><i class="fas fa-star"></i> ${p.rating} Rating</span>
+              <span><i class="fas fa-fire"></i> ${p.popularity}% Popular</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Image Gallery -->
+        <div class="image-gallery fade-in">
+          ${galleryImages.slice(0, 4).map(img => `
+            <div class="gallery-item">
+              <img src="${img}" alt="${p.name}" loading="lazy">
+            </div>
+          `).join('')}
+        </div>
+        
+        <!-- Details Layout -->
+        <div class="details-layout">
+          <!-- Main Content -->
+          <div class="details-content fade-in">
+            <h2>Overview</h2>
+            <p style="font-size: 1.1rem; line-height: 1.8; color: var(--dark); margin-bottom: var(--spacing-lg);">
+              ${p.description}
+            </p>
+            
+            <div class="details-meta">
+              <div class="meta-item">
+                <i class="fas fa-clock"></i>
+                <span>Duration: ${p.duration} days</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-users"></i>
+                <span>Group size: 2-12 people</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-language"></i>
+                <span>Language: English</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Instant confirmation</span>
+              </div>
+            </div>
+            
+            <h3 style="margin-top: var(--spacing-lg);">What's Included</h3>
+            <ul style="list-style: none; padding: 0;">
+              <li style="padding: var(--spacing-xs) 0; display: flex; align-items: center; gap: var(--spacing-sm);">
+                <i class="fas fa-check" style="color: var(--primary);"></i>
+                <span>Accommodation</span>
+              </li>
+              <li style="padding: var(--spacing-xs) 0; display: flex; align-items: center; gap: var(--spacing-sm);">
+                <i class="fas fa-check" style="color: var(--primary);"></i>
+                <span>Professional guide</span>
+              </li>
+              <li style="padding: var(--spacing-xs) 0; display: flex; align-items: center; gap: var(--spacing-sm);">
+                <i class="fas fa-check" style="color: var(--primary);"></i>
+                <span>Selected meals</span>
+              </li>
+              <li style="padding: var(--spacing-xs) 0; display: flex; align-items: center; gap: var(--spacing-sm);">
+                <i class="fas fa-check" style="color: var(--primary);"></i>
+                <span>Transportation</span>
+              </li>
+              <li style="padding: var(--spacing-xs) 0; display: flex; align-items: center; gap: var(--spacing-sm);">
+                <i class="fas fa-check" style="color: var(--primary);"></i>
+                <span>Activity equipment</span>
+              </li>
+            </ul>
+            
+            <!-- Itinerary Section -->
+            <div class="itinerary-section">
+              <h2 style="margin-bottom: var(--spacing-lg);">Day-by-Day Itinerary</h2>
+              ${itinerary.map((item, index) => `
+                <div class="itinerary-item ${index === 0 ? 'active' : ''}">
+                  <div class="itinerary-header">
+                    <h4>${item.day}: ${item.title}</h4>
+                    <i class="fas fa-chevron-down itinerary-icon"></i>
+                  </div>
+                  <div class="itinerary-content">
+                    <p>${item.content}</p>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+            
+            <!-- Map Section -->
+            <div class="map-section">
+              <h2 style="margin-bottom: var(--spacing-md);">Location</h2>
+              <div class="map-container">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3619.0!2d67.0!3d24.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDU0JzAwLjAiTiA2N8KwMDAnMDAuMCJF!5e0!3m2!1sen!2s!4v1234567890"
+                  allowfullscreen=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Booking Panel -->
+          <div class="booking-panel fade-in">
+            <div class="price-display">
+              <div class="price-amount">$${p.price}</div>
+              <div class="price-label">per person</div>
+            </div>
+            
+            <form class="booking-form" id="bookingForm">
+              <div class="form-group">
+                <label for="bookingDate">Select Date</label>
+                <input type="date" id="bookingDate" name="date" required min="">
+              </div>
+              
+              <div class="form-group">
+                <label for="bookingGuests">Number of Guests</label>
+                <select id="bookingGuests" name="guests" required>
+                  <option value="">Select guests</option>
+                  <option value="1">1 Guest</option>
+                  <option value="2">2 Guests</option>
+                  <option value="3">3 Guests</option>
+                  <option value="4">4 Guests</option>
+                  <option value="5+">5+ Guests</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="bookingName">Full Name</label>
+                <input type="text" id="bookingName" name="name" required placeholder="Enter your name">
+              </div>
+              
+              <div class="form-group">
+                <label for="bookingEmail">Email</label>
+                <input type="email" id="bookingEmail" name="email" required placeholder="Enter your email">
+              </div>
+              
+              <div class="form-group">
+                <label for="bookingPhone">Phone</label>
+                <input type="tel" id="bookingPhone" name="phone" required placeholder="Enter your phone">
+              </div>
+              
+              <button type="submit" class="btn btn-large" style="width: 100%; margin-top: var(--spacing-md);">
+                <i class="fas fa-calendar-check"></i> Book Now
+              </button>
+              
+              <a href="review.html" class="btn btn-outline" style="width: 100%; text-align: center; margin-top: var(--spacing-sm);">
+                <i class="fas fa-star"></i> Leave a Review
+              </a>
+            </form>
+          </div>
+        </div>
+      `;
+      
+      // Set minimum date
+      const dateInput = document.getElementById('bookingDate');
+      if (dateInput) {
+        dateInput.min = new Date().toISOString().split('T')[0];
+      }
+      
+      // Setup itinerary accordion
+      document.querySelectorAll('.itinerary-header').forEach(header => {
+        header.addEventListener('click', () => {
+          const item = header.parentElement;
+          const isActive = item.classList.contains('active');
+          
+          document.querySelectorAll('.itinerary-item').forEach(i => {
+            i.classList.remove('active');
+          });
+          
+          if (!isActive) {
+            item.classList.add('active');
+          }
+        });
+      });
+      
+      // Setup booking form
+      const bookingForm = document.getElementById('bookingForm');
+      if (bookingForm) {
+        bookingForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          alert(`Booking request received for ${p.name}!\n\nThis is a demo. In a real application, this would process your booking.`);
+          bookingForm.reset();
+        });
+      }
+      
+      // Gallery lightbox (simple implementation)
+      document.querySelectorAll('.gallery-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const img = item.querySelector('img');
+          if (img) {
+            window.open(img.src, '_blank');
+          }
+        });
+      });
+    }
+    
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+      renderDetails();
+    });
   </script>
-
-  hello
 </body>
 </html>
