@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Read customer reviews and share your travel experience. Real reviews from real travelers.">
+  <title>Travel Smart - Reviews</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://kit.fontawesome.com/747f67b7cc.js" crossorigin="anonymous"></script>
+  <style>
+    .reviews-hero {
+      position: relative;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+    
+    .reviews-hero .hero-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      z-index: -2;
+    }
+    
+    .reviews-hero .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(14, 165, 161, 0.8) 0%, rgba(14, 138, 147, 0.9) 100%);
+      z-index: -1;
+    }
+    
+    .reviews-hero .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      padding: var(--spacing-xl);
+    }
+    
+    .reviews-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--spacing-xl) 0;
+    }
+    
+    .filters-section {
+      background: var(--card);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      margin-bottom: var(--spacing-lg);
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+    
+    .filter-group label {
+      font-weight: 600;
+      color: var(--dark);
+      margin: 0;
+    }
+    
+    .filter-group select {
+      padding: 0.625rem 1rem;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: white;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .filter-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(14, 165, 161, 0.1);
+    }
+    
+    .rating-filter {
+      display: flex;
+      gap: var(--spacing-xs);
+    }
+    
+    .rating-btn {
+      background: var(--bg);
+      border: 2px solid var(--border);
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 1.2rem;
+    }
+    
+    .rating-btn:hover,
+    .rating-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+      transform: scale(1.1);
+    }
+    
+    .stats-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .stat-card {
+      background: var(--card);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius);
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+    
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .stat-label {
+      color: var(--muted);
+      font-weight: 600;
+    }
+    
+    .reviews-grid {
+      display: grid;
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .review-card {
+      background: var(--card);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+    
+    .review-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: var(--spacing-md);
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+    }
+    
+    .reviewer-info {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+    }
+    
+    .reviewer-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: white;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    
+    .reviewer-details h4 {
+      margin-bottom: var(--spacing-xs);
+      color: var(--dark);
+    }
+    
+    .reviewer-details p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    
+    .review-rating {
+      display: flex;
+      gap: 0.25rem;
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+    
+    .review-content {
+      margin-bottom: var(--spacing-md);
+      line-height: 1.8;
+      color: var(--dark);
+    }
+    
+    .review-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: var(--spacing-md);
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+    }
+    
+    .review-destination {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      color: var(--primary);
+      font-weight: 600;
+    }
+    
+    .review-date {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    
+    .review-form-section {
+      background: var(--card);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .no-reviews {
+      text-align: center;
+      padding: var(--spacing-2xl);
+      color: var(--muted);
+    }
+    
+    .no-reviews i {
+      font-size: 4rem;
+      margin-bottom: var(--spacing-md);
+      color: var(--border);
+    }
+    
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .review-card:nth-child(1) { animation-delay: 0.1s; }
+    .review-card:nth-child(2) { animation-delay: 0.2s; }
+    .review-card:nth-child(3) { animation-delay: 0.3s; }
+    .review-card:nth-child(4) { animation-delay: 0.4s; }
+    .review-card:nth-child(5) { animation-delay: 0.5s; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <nav class="container inner">
+      <div class="logo" onclick="location.href='index.html'">
+        <div class="icon">TS</div>
+        <div>TRAVEL <strong>SMART</strong></div>
+      </div>
+      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav">
+        <li><a href="index.html" class="btn">Home</a></li>
+        <li><a href="catalog.html" class="btn">Destinations</a></li>
+        <li><a href="packages.html" class="btn">Packages</a></li>
+        <li><a href="about.html" class="btn">About</a></li>
+        <li><a href="contact.html" class="btn">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="reviews-hero">
+    <div class="hero-image" style="background-image: url('assets/img.jpg');"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 style="color: white; margin-bottom: var(--spacing-sm);">Customer Reviews</h1>
+      <p style="color: rgba(255,255,255,0.95); font-size: 1.1rem;">
+        Real experiences from real travelers. See what our customers have to say!
+      </p>
+    </div>
+  </section>
+
+  <!-- Reviews Container -->
+  <section class="section">
+    <div class="container reviews-container">
+      <!-- Stats Section -->
+      <div class="stats-section fade-in">
+        <div class="stat-card">
+          <div class="stat-value" id="totalReviews">0</div>
+          <div class="stat-label">Total Reviews</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="avgRating">0.0</div>
+          <div class="stat-label">Average Rating</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="fiveStar">0</div>
+          <div class="stat-label">5-Star Reviews</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="destinations">0</div>
+          <div class="stat-label">Destinations Reviewed</div>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters-section fade-in">
+        <div class="filter-group">
+          <label for="filterDestination">Destination:</label>
+          <select id="filterDestination">
+            <option value="all">All Destinations</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Rating:</label>
+          <div class="rating-filter">
+            <button class="rating-btn active" data-rating="all">All</button>
+            <button class="rating-btn" data-rating="5">5★</button>
+            <button class="rating-btn" data-rating="4">4★</button>
+            <button class="rating-btn" data-rating="3">3★</button>
+            <button class="rating-btn" data-rating="2">2★</button>
+            <button class="rating-btn" data-rating="1">1★</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review Form -->
+      <div class="review-form-section fade-in">
+        <h2 style="margin-bottom: var(--spacing-md);">Share Your Experience</h2>
+        <form id="reviewForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="reviewPackage">Select Package:</label>
+              <select id="reviewPackage" required>
+                <option value="">Choose a package...</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="reviewRating">Your Rating:</label>
+              <div class="star-rating" style="justify-content: flex-start; direction: ltr;">
+                <input type="radio" id="r5" name="rating" value="5" required>
+                <label for="r5">★</label>
+                <input type="radio" id="r4" name="rating" value="4">
+                <label for="r4">★</label>
+                <input type="radio" id="r3" name="rating" value="3">
+                <label for="r3">★</label>
+                <input type="radio" id="r2" name="rating" value="2">
+                <label for="r2">★</label>
+                <input type="radio" id="r1" name="rating" value="1">
+                <label for="r1">★</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="reviewText">Your Review:</label>
+            <textarea id="reviewText" rows="5" placeholder="Share your experience..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-large">
+            <i class="fas fa-paper-plane"></i> Submit Review
+          </button>
+        </form>
+      </div>
+
+      <!-- Reviews List -->
+      <div id="reviewsList" class="reviews-grid"></div>
+      
+      <div class="no-reviews" id="noReviews" style="display: none;">
+        <i class="fas fa-comments"></i>
+        <h3>No reviews match your filters</h3>
+        <p>Try adjusting your filters or be the first to review!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-section">
+          <h4>Find Us</h4>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> Office #32, Model Colony, Karachi</li>
+            <li><i class="fas fa-phone"></i> +92-9999878398</li>
+            <li><i class="fas fa-envelope"></i> travel@smart.com.pk</li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="catalog.html">Destinations</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="feedback.html">Feedback</a></li>
+            <li><a href="review.html">Reviews</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Follow Us</h4>
+          <div class="social-icons">
+            <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://x.com/" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Travel Smart. All rights reserved. | Designed by M & M | <a href="#" style="color: rgba(255,255,255,0.7);">Privacy Policy</a></p>
+    </div>
+  </footer>
+
+  <script src="js/utils.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/site.js"></script>
+  <script>
+    // Sample reviews data
+    const sampleReviews = [
+      {
+        id: 1,
+        packageId: 1,
+        packageName: 'Maldives Escape',
+        reviewer: 'Sarah Johnson',
+        avatar: 'SJ',
+        rating: 5,
+        text: 'An absolutely amazing experience! Travel Smart made our honeymoon unforgettable. Every detail was perfect, from the accommodations to the guided tours. Highly recommend!',
+        date: '2024-12-15'
+      },
+      {
+        id: 2,
+        packageId: 3,
+        packageName: 'Istanbul City Break',
+        reviewer: 'Michael Chen',
+        avatar: 'MC',
+        rating: 5,
+        text: 'Best travel agency we\'ve ever used. The team was responsive, knowledgeable, and helped us plan the perfect family vacation. The kids are already asking when we can go again!',
+        date: '2024-12-10'
+      },
+      {
+        id: 3,
+        packageId: 1,
+        packageName: 'Maldives Escape',
+        reviewer: 'Emma Williams',
+        avatar: 'EW',
+        rating: 4,
+        text: 'Great value for money and excellent customer service. The destination recommendations were spot-on, and everything went smoothly. Will definitely book with them again.',
+        date: '2024-12-05'
+      },
+      {
+        id: 4,
+        packageId: 5,
+        packageName: 'Everest Base Trek',
+        reviewer: 'David Park',
+        avatar: 'DP',
+        rating: 5,
+        text: 'Incredible adventure! The guides were professional and knowledgeable. The trek was challenging but rewarding. Travel Smart exceeded all expectations.',
+        date: '2024-11-28'
+      },
+      {
+        id: 5,
+        packageId: 9,
+        packageName: 'Tokyo Urban Experience',
+        reviewer: 'Lisa Anderson',
+        avatar: 'LA',
+        rating: 4,
+        text: 'Tokyo was amazing! The itinerary was well-planned and we got to experience both modern and traditional aspects of the city. Great food recommendations too!',
+        date: '2024-11-20'
+      }
+    ];
+    
+    // Initialize reviews
+    if (!window.REVIEWS) window.REVIEWS = {};
+    
+    // Merge sample reviews with existing reviews
+    sampleReviews.forEach(review => {
+      if (!window.REVIEWS[review.packageId]) {
+        window.REVIEWS[review.packageId] = [];
+      }
+      window.REVIEWS[review.packageId].push({
+        rating: review.rating,
+        text: review.text,
+        date: review.date,
+        reviewer: review.reviewer,
+        avatar: review.avatar
+      });
+    });
+    
+    let currentFilters = {
+      destination: 'all',
+      rating: 'all'
+    };
+    
+    // Initialize
+    function initReviews() {
+      populatePackageSelect();
+      populateDestinationFilter();
+      renderReviews();
+      updateStats();
+      setupFilters();
+      setupForm();
+    }
+    
+    // Populate package select
+    function populatePackageSelect() {
+      const select = document.getElementById('reviewPackage');
+      (window.TRAVEL_DATA || []).forEach(p => {
+        const option = document.createElement('option');
+        option.value = p.id;
+        option.textContent = p.name;
+        select.appendChild(option);
+      });
+    }
+    
+    // Populate destination filter
+    function populateDestinationFilter() {
+      const select = document.getElementById('filterDestination');
+      const destinations = [...new Set((window.TRAVEL_DATA || []).map(p => p.name))];
+      destinations.forEach(name => {
+        const option = document.createElement('option');
+        option.value = name;
+        option.textContent = name;
+        select.appendChild(option);
+      });
+    }
+    
+    // Setup filters
+    function setupFilters() {
+      document.getElementById('filterDestination').addEventListener('change', (e) => {
+        currentFilters.destination = e.target.value;
+        renderReviews();
+      });
+      
+      document.querySelectorAll('.rating-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentFilters.rating = btn.dataset.rating;
+          renderReviews();
+        });
+      });
+    }
+    
+    // Render reviews
+    function renderReviews() {
+      const container = document.getElementById('reviewsList');
+      container.innerHTML = '';
+      
+      let allReviews = [];
+      Object.keys(window.REVIEWS || {}).forEach(packageId => {
+        const package = (window.TRAVEL_DATA || []).find(p => p.id == packageId);
+        if (!package) return;
+        
+        (window.REVIEWS[packageId] || []).forEach(review => {
+          allReviews.push({
+            ...review,
+            packageId: parseInt(packageId),
+            packageName: package.name
+          });
+        });
+      });
+      
+      // Apply filters
+      let filteredReviews = allReviews;
+      
+      if (currentFilters.destination !== 'all') {
+        filteredReviews = filteredReviews.filter(r => r.packageName === currentFilters.destination);
+      }
+      
+      if (currentFilters.rating !== 'all') {
+        filteredReviews = filteredReviews.filter(r => r.rating == currentFilters.rating);
+      }
+      
+      if (filteredReviews.length === 0) {
+        document.getElementById('noReviews').style.display = 'block';
+        return;
+      }
+      
+      document.getElementById('noReviews').style.display = 'none';
+      
+      // Sort by date (newest first)
+      filteredReviews.sort((a, b) => new Date(b.date) - new Date(a.date));
+      
+      filteredReviews.forEach(review => {
+        const card = document.createElement('article');
+        card.className = 'review-card';
+        
+        const avatar = review.avatar || review.reviewer?.charAt(0) || 'U';
+        const reviewer = review.reviewer || 'Anonymous';
+        
+        card.innerHTML = `
+          <div class="review-header">
+            <div class="reviewer-info">
+              <div class="reviewer-avatar">${avatar}</div>
+              <div class="reviewer-details">
+                <h4>${reviewer}</h4>
+                <p>Traveler</p>
+              </div>
+            </div>
+            <div class="review-rating">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
+          </div>
+          <div class="review-content">${review.text}</div>
+          <div class="review-meta">
+            <div class="review-destination">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>${review.packageName}</span>
+            </div>
+            <div class="review-date">${new Date(review.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+          </div>
+        `;
+        
+        container.appendChild(card);
+      });
+    }
+    
+    // Update stats
+    function updateStats() {
+      let totalReviews = 0;
+      let totalRating = 0;
+      let fiveStarCount = 0;
+      const destinations = new Set();
+      
+      Object.keys(window.REVIEWS || {}).forEach(packageId => {
+        const package = (window.TRAVEL_DATA || []).find(p => p.id == packageId);
+        if (package) destinations.add(package.name);
+        
+        (window.REVIEWS[packageId] || []).forEach(review => {
+          totalReviews++;
+          totalRating += review.rating;
+          if (review.rating === 5) fiveStarCount++;
+        });
+      });
+      
+      document.getElementById('totalReviews').textContent = totalReviews;
+      document.getElementById('avgRating').textContent = totalReviews > 0 ? (totalRating / totalReviews).toFixed(1) : '0.0';
+      document.getElementById('fiveStar').textContent = fiveStarCount;
+      document.getElementById('destinations').textContent = destinations.size;
+    }
+    
+    // Setup form
+    function setupForm() {
+      document.getElementById('reviewForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const packageId = document.getElementById('reviewPackage').value;
+        const rating = parseInt(document.querySelector('input[name="rating"]:checked')?.value);
+        const text = document.getElementById('reviewText').value;
+        
+        if (!packageId || !rating || !text) {
+          alert('Please fill in all fields');
+          return;
+        }
+        
+        // Post review
+        window.postReview(packageId, rating, text);
+        
+        // Clear form
+        document.getElementById('reviewForm').reset();
+        document.querySelectorAll('.star-rating label').forEach(label => {
+          label.style.color = 'var(--border)';
+        });
+        
+        // Update display
+        renderReviews();
+        updateStats();
+        
+        // Show success message
+        const success = document.createElement('div');
+        success.className = 'success-message active';
+        success.style.position = 'fixed';
+        success.style.top = '50%';
+        success.style.left = '50%';
+        success.style.transform = 'translate(-50%, -50%)';
+        success.style.zIndex = '3000';
+        success.innerHTML = '<i class="fas fa-check-circle"></i><h3 style="color: white;">Thank You!</h3><p style="color: rgba(255,255,255,0.95);">Your review has been posted!</p>';
+        document.body.appendChild(success);
+        
+        setTimeout(() => {
+          success.remove();
+        }, 3000);
+      });
+      
+      // Star rating interaction
+      document.querySelectorAll('.star-rating input').forEach(input => {
+        input.addEventListener('change', () => {
+          const rating = parseInt(input.value);
+          const labels = document.querySelectorAll('.star-rating label');
+          labels.forEach((label, index) => {
+            if (index < rating) {
+              label.style.color = '#f59e0b';
+            } else {
+              label.style.color = 'var(--border)';
+            }
+          });
+        });
+      });
+    }
+    
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+      initReviews();
+    });
+  </script>
+</body>
+</html>

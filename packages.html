@@ -50,6 +50,7 @@
       padding: var(--spacing-xl);
     }
     
+<<<<<<< HEAD
     /* Tour Card Styles from Catalog */
     .catalog-section {
       margin-bottom: var(--spacing-2xl);
@@ -69,6 +70,17 @@
     .tour-card {
       background: var(--card);
       border-radius: var(--radius);
+=======
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: var(--spacing-xl);
+    }
+    
+    .package-card {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
       overflow: hidden;
       box-shadow: var(--shadow);
       transition: var(--transition);
@@ -77,6 +89,7 @@
       flex-direction: column;
     }
     
+<<<<<<< HEAD
     .tour-card:hover {
       transform: translateY(-8px);
       box-shadow: var(--shadow-xl);
@@ -85,29 +98,57 @@
     .tour-media {
       width: 100%;
       height: 200px;
+=======
+    .package-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-xl);
+    }
+    
+    .package-image {
+      width: 100%;
+      height: 250px;
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
       object-fit: cover;
       transition: var(--transition-slow);
     }
     
+<<<<<<< HEAD
     .tour-card:hover .tour-media {
       transform: scale(1.1);
     }
     
     .tour-body {
       padding: var(--spacing-md);
+=======
+    .package-card:hover .package-image {
+      transform: scale(1.1);
+    }
+    
+    .package-content {
+      padding: var(--spacing-lg);
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
       display: flex;
       flex-direction: column;
       flex: 1;
     }
     
+<<<<<<< HEAD
     .tour-title {
       font-size: 1.25rem;
+=======
+    .package-title {
+      font-size: 1.5rem;
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
       font-weight: 700;
       color: var(--dark);
       margin-bottom: var(--spacing-xs);
     }
     
+<<<<<<< HEAD
     .tour-meta {
+=======
+    .package-meta {
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -116,31 +157,55 @@
       color: var(--muted);
     }
     
+<<<<<<< HEAD
     .tour-price {
       font-size: 1.75rem;
+=======
+    .package-price {
+      font-size: 2rem;
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
       font-weight: 700;
       color: var(--primary);
       margin: var(--spacing-sm) 0;
     }
     
+<<<<<<< HEAD
     .tour-rating {
+=======
+    .package-rating {
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
       display: flex;
       align-items: center;
       gap: var(--spacing-xs);
       margin-bottom: var(--spacing-sm);
     }
     
+<<<<<<< HEAD
     .tour-actions {
+=======
+    .package-actions {
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
       display: flex;
       gap: var(--spacing-sm);
       margin-top: auto;
     }
     
+<<<<<<< HEAD
     /* Responsive Grid */
     .packages-category-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: var(--spacing-lg);
+=======
+    .package-actions .btn {
+      flex: 1;
+    }
+    
+    @media (max-width: 768px) {
+      .packages-grid {
+        grid-template-columns: 1fr;
+      }
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
     }
   </style>
 </head>
@@ -184,7 +249,11 @@
         <p>Handpicked packages designed to create unforgettable memories</p>
       </div>
       
+<<<<<<< HEAD
       <div id="packagesContainer"></div>
+=======
+      <div id="packagesGrid" class="packages-grid"></div>
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
     </div>
   </section>
 
@@ -232,6 +301,7 @@
     // Package types mapping
     const packageTypes = {
       'beach': {
+<<<<<<< HEAD
         name: 'Beach Getaways',
         description: 'Relax on sandy beaches with all-inclusive amenities.',
         icon: '🏖️'
@@ -249,6 +319,25 @@
       'adventure': {
         name: 'Adventure Tours',
         description: 'Thrilling experiences for the bold traveler.',
+=======
+        name: 'Beach Getaway',
+        description: 'Relax on sandy beaches with all-inclusive amenities. Perfect for families and couples.',
+        icon: '🏖️'
+      },
+      'mountain': {
+        name: 'Mountain Adventure',
+        description: 'Experience thrilling activities and explore hidden treasures. For the adventurous soul.',
+        icon: '🏔️'
+      },
+      'city': {
+        name: 'City Break',
+        description: 'Explore vibrant cities, culture, and cuisine. Urban adventures await.',
+        icon: '🏙️'
+      },
+      'adventure': {
+        name: 'Adventure Tour',
+        description: 'Thrilling experiences and outdoor activities for the bold traveler.',
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
         icon: '🧭'
       }
     };
@@ -256,7 +345,11 @@
     // Group packages by type
     function groupPackagesByType() {
       if (!window.TRAVEL_DATA || window.TRAVEL_DATA.length === 0) {
+<<<<<<< HEAD
         return {};
+=======
+        return [];
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
       }
 
       const grouped = {};
@@ -272,12 +365,19 @@
 
     // Render packages
     function renderPackages() {
+<<<<<<< HEAD
       const container = document.getElementById('packagesContainer');
+=======
+      const container = document.getElementById('packagesGrid');
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
       if (!container) return;
 
       // Check if data is available
       if (!window.TRAVEL_DATA || window.TRAVEL_DATA.length === 0) {
+<<<<<<< HEAD
         // Retry logic mostly for slow loading or if script order is off
+=======
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
         const checkData = setInterval(() => {
           if (window.TRAVEL_DATA && window.TRAVEL_DATA.length > 0) {
             clearInterval(checkData);
@@ -288,7 +388,11 @@
         setTimeout(() => {
           clearInterval(checkData);
           if (!window.TRAVEL_DATA || window.TRAVEL_DATA.length === 0) {
+<<<<<<< HEAD
             container.innerHTML = '<div class="card" style="text-align: center; padding: var(--spacing-xl);"><h3>Loading packages...</h3></div>';
+=======
+            container.innerHTML = '<div class="card" style="grid-column: 1/-1; text-align: center; padding: var(--spacing-xl);"><h3>Loading packages...</h3><p>Please wait while we load the data</p></div>';
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
           }
         }, 3000);
         return;
@@ -297,11 +401,16 @@
       const grouped = groupPackagesByType();
       let html = '';
 
+<<<<<<< HEAD
       // Create a section for each type
+=======
+      // Create a package card for each type
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
       Object.keys(packageTypes).forEach(type => {
         if (grouped[type] && grouped[type].length > 0) {
           const typeInfo = packageTypes[type];
           const packages = grouped[type];
+<<<<<<< HEAD
 
           html += `
             <div class="catalog-section">
@@ -341,10 +450,45 @@
               </div>
             </div>
             <hr style="border: 0; border-top: 1px solid var(--border); margin: var(--spacing-xl) 0;">
+=======
+          const avgPrice = Math.round(packages.reduce((sum, p) => sum + p.price, 0) / packages.length);
+          const avgRating = (packages.reduce((sum, p) => sum + p.rating, 0) / packages.length).toFixed(1);
+          const totalDays = packages.reduce((sum, p) => sum + p.duration, 0);
+          const minDays = Math.min(...packages.map(p => p.duration));
+          const maxDays = Math.max(...packages.map(p => p.duration));
+
+          html += `
+            <article class="package-card fade-in">
+              <img src="${packages[0].hero}" alt="${typeInfo.name}" class="package-image" loading="lazy">
+              <div class="package-content">
+                <div style="font-size: 3rem; margin-bottom: var(--spacing-sm); text-align: center;">${typeInfo.icon}</div>
+                <h3 class="package-title">${typeInfo.name}</h3>
+                <p style="color: var(--muted); margin-bottom: var(--spacing-md); flex: 1;">${typeInfo.description}</p>
+                <div class="package-meta">
+                  <span><i class="fas fa-calendar"></i> ${minDays}-${maxDays} days</span>
+                  <span><i class="fas fa-box"></i> ${packages.length} packages</span>
+                </div>
+                <div class="package-rating">
+                  ${'★'.repeat(Math.floor(avgRating))}${'☆'.repeat(5 - Math.floor(avgRating))}
+                  <span style="color: var(--muted); margin-left: var(--spacing-xs);">${avgRating}</span>
+                </div>
+                <div class="package-price">From $${Math.min(...packages.map(p => p.price))}</div>
+                <div class="package-actions">
+                  <a href="catalog.html?filterType=${type}" class="btn" style="flex: 1;">
+                    <i class="fas fa-eye"></i> View Packages
+                  </a>
+                  <a href="catalog.html?filterType=${type}" class="btn btn-secondary" style="flex: 1; text-align: center;">
+                    <i class="fas fa-info-circle"></i> Explore
+                  </a>
+                </div>
+              </div>
+            </article>
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
           `;
         }
       });
 
+<<<<<<< HEAD
       // Remove the last HR
       if (html.endsWith('<hr style="border: 0; border-top: 1px solid var(--border); margin: var(--spacing-xl) 0;">')) {
         html = html.substring(0, html.lastIndexOf('<hr'));
@@ -373,6 +517,14 @@
       }, observerOptions);
 
       container.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+=======
+      // If no packages, show message
+      if (!html) {
+        html = '<div class="card" style="grid-column: 1/-1; text-align: center; padding: var(--spacing-xl);"><h3>No packages available</h3><p>Please check back later</p></div>';
+      }
+
+      container.innerHTML = html;
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
     }
 
     // Initialize on load

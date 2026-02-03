@@ -435,8 +435,12 @@
             <!-- Itinerary Section -->
             <div class="itinerary-section">
               <h2 style="margin-bottom: var(--spacing-lg);">Day-by-Day Itinerary</h2>
+<<<<<<< HEAD
               ${itinerary.map(function(item, index) {
                 return `
+=======
+              ${itinerary.map((item, index) => `
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
                 <div class="itinerary-item ${index === 0 ? 'active' : ''}">
                   <div class="itinerary-header">
                     <h4>${item.day}: ${item.title}</h4>
@@ -446,8 +450,12 @@
                     <p>${item.content}</p>
                   </div>
                 </div>
+<<<<<<< HEAD
               `;
               }).join('')}
+=======
+              `).join('')}
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
             </div>
             
             <!-- Map Section -->
@@ -523,12 +531,21 @@
       }
       
       // Setup itinerary accordion
+<<<<<<< HEAD
       document.querySelectorAll('.itinerary-header').forEach(function(header) {
         header.addEventListener('click', function() {
           const item = header.parentElement;
           const isActive = item.classList.contains('active');
           
           document.querySelectorAll('.itinerary-item').forEach(function(i) {
+=======
+      document.querySelectorAll('.itinerary-header').forEach(header => {
+        header.addEventListener('click', () => {
+          const item = header.parentElement;
+          const isActive = item.classList.contains('active');
+          
+          document.querySelectorAll('.itinerary-item').forEach(i => {
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
             i.classList.remove('active');
           });
           
@@ -541,7 +558,11 @@
       // Setup booking form
       const bookingForm = document.getElementById('bookingForm');
       if (bookingForm) {
+<<<<<<< HEAD
         bookingForm.addEventListener('submit', function(e) {
+=======
+        bookingForm.addEventListener('submit', (e) => {
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
           e.preventDefault();
           alert(`Booking request received for ${p.name}!\n\nThis is a demo. In a real application, this would process your booking.`);
           bookingForm.reset();
@@ -549,8 +570,13 @@
       }
       
       // Gallery lightbox (simple implementation)
+<<<<<<< HEAD
       document.querySelectorAll('.gallery-item').forEach(function(item) {
         item.addEventListener('click', function() {
+=======
+      document.querySelectorAll('.gallery-item').forEach(item => {
+        item.addEventListener('click', () => {
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
           const img = item.querySelector('img');
           if (img) {
             window.open(img.src, '_blank');
@@ -560,7 +586,11 @@
     }
     
     // Initialize on load
+<<<<<<< HEAD
     document.addEventListener('DOMContentLoaded', function() {
+=======
+    document.addEventListener('DOMContentLoaded', () => {
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
       renderDetails();
     });
   </script>

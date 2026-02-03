@@ -6,8 +6,13 @@ const observerOptions = {
   rootMargin: '0px 0px -50px 0px'
 };
 
+<<<<<<< HEAD
 const observer = new IntersectionObserver(function(entries) {
   entries.forEach(function(entry) {
+=======
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
     }
@@ -15,17 +20,26 @@ const observer = new IntersectionObserver(function(entries) {
 }, observerOptions);
 
 // Initialize scroll animations
+<<<<<<< HEAD
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.fade-in').forEach(function(el) {
     observer.observe(el);
   });
+=======
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
 });
 
 // Header scroll effect
 let lastScroll = 0;
 const header = document.querySelector('.header');
 
+<<<<<<< HEAD
 window.addEventListener('scroll', function() {
+=======
+window.addEventListener('scroll', () => {
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
   const currentScroll = window.pageYOffset;
   
   if (currentScroll > 100) {
@@ -41,21 +55,34 @@ window.addEventListener('scroll', function() {
 const menuToggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.nav');
 
+<<<<<<< HEAD
 menuToggle?.addEventListener('click', function() {
+=======
+menuToggle?.addEventListener('click', () => {
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
   nav?.classList.toggle('active');
   menuToggle.setAttribute('aria-expanded', nav?.classList.contains('active'));
 });
 
 // Close mobile menu on link click
+<<<<<<< HEAD
 document.querySelectorAll('.nav a').forEach(function(link) {
   link.addEventListener('click', function() {
+=======
+document.querySelectorAll('.nav a').forEach(link => {
+  link.addEventListener('click', () => {
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
     nav?.classList.remove('active');
     menuToggle?.setAttribute('aria-expanded', 'false');
   });
 });
 
 // Smooth scroll for anchor links
+<<<<<<< HEAD
 document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+=======
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
   anchor.addEventListener('click', function (e) {
     const href = this.getAttribute('href');
     if (href === '#') return;
@@ -79,7 +106,11 @@ function validateForm(form) {
   let isValid = true;
   const inputs = form.querySelectorAll('input[required], textarea[required], select[required]');
   
+<<<<<<< HEAD
   inputs.forEach(function(input) {
+=======
+  inputs.forEach(input => {
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
     if (!input.value.trim()) {
       isValid = false;
       input.classList.add('error');
@@ -101,16 +132,27 @@ function showSuccessMessage(element, message) {
   element.style.opacity = '0';
   element.style.transform = 'translateY(-10px)';
   
+<<<<<<< HEAD
   setTimeout(function() {
+=======
+  setTimeout(() => {
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
     element.style.transition = 'all 0.3s ease-out';
     element.style.opacity = '1';
     element.style.transform = 'translateY(0)';
   }, 10);
   
+<<<<<<< HEAD
   setTimeout(function() {
     element.style.opacity = '0';
     element.style.transform = 'translateY(-10px)';
     setTimeout(function() {
+=======
+  setTimeout(() => {
+    element.style.opacity = '0';
+    element.style.transform = 'translateY(-10px)';
+    setTimeout(() => {
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
       element.textContent = '';
       element.classList.remove('success');
     }, 300);
@@ -135,7 +177,11 @@ function closeModal(modalId) {
 }
 
 // Close modal on backdrop click
+<<<<<<< HEAD
 document.addEventListener('click', function(e) {
+=======
+document.addEventListener('click', (e) => {
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
   if (e.target.classList.contains('modal')) {
     e.target.classList.remove('active');
     document.body.style.overflow = '';
@@ -143,9 +189,15 @@ document.addEventListener('click', function(e) {
 });
 
 // Close modal on Escape key
+<<<<<<< HEAD
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     document.querySelectorAll('.modal.active').forEach(function(modal) {
+=======
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal.active').forEach(modal => {
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
       modal.classList.remove('active');
       document.body.style.overflow = '';
     });
@@ -153,13 +205,22 @@ document.addEventListener('keydown', function(e) {
 });
 
 // Accordion functionality
+<<<<<<< HEAD
 document.querySelectorAll('.accordion-header').forEach(function(header) {
   header.addEventListener('click', function() {
+=======
+document.querySelectorAll('.accordion-header').forEach(header => {
+  header.addEventListener('click', () => {
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
     const item = header.parentElement;
     const isActive = item.classList.contains('active');
     
     // Close all accordions
+<<<<<<< HEAD
     document.querySelectorAll('.accordion-item').forEach(function(acc) {
+=======
+    document.querySelectorAll('.accordion-item').forEach(acc => {
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
       acc.classList.remove('active');
     });
     
@@ -172,8 +233,13 @@ document.querySelectorAll('.accordion-header').forEach(function(header) {
 
 // Image lazy loading
 if ('IntersectionObserver' in window) {
+<<<<<<< HEAD
   const imageObserver = new IntersectionObserver(function(entries, observer) {
     entries.forEach(function(entry) {
+=======
+  const imageObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
       if (entry.isIntersecting) {
         const img = entry.target;
         if (img.dataset.src) {
@@ -185,7 +251,11 @@ if ('IntersectionObserver' in window) {
     });
   });
   
+<<<<<<< HEAD
   document.querySelectorAll('img[data-src]').forEach(function(img) {
+=======
+  document.querySelectorAll('img[data-src]').forEach(img => {
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
     imageObserver.observe(img);
   });
 }
@@ -198,7 +268,11 @@ function initTestimonialCarousel() {
   let currentSlide = 0;
   
   function showSlide(index) {
+<<<<<<< HEAD
     slides.forEach(function(slide, i) {
+=======
+    slides.forEach((slide, i) => {
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
       slide.classList.toggle('active', i === index);
     });
   }
@@ -216,6 +290,7 @@ function initTestimonialCarousel() {
 }
 
 // Initialize on DOM ready
+<<<<<<< HEAD
 document.addEventListener('DOMContentLoaded', function() {
   initTestimonialCarousel();
   initParallax();
@@ -266,14 +341,27 @@ function animateValue(obj, start, end, duration, suffix = '') {
   window.requestAnimationFrame(step);
 }
 
+=======
+document.addEventListener('DOMContentLoaded', () => {
+  initTestimonialCarousel();
+});
+
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
 // Parallax effect
 function initParallax() {
   const parallaxElements = document.querySelectorAll('.parallax');
   
+<<<<<<< HEAD
   window.addEventListener('scroll', function() {
     const scrolled = window.pageYOffset;
     
     parallaxElements.forEach(function(element) {
+=======
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    
+    parallaxElements.forEach(element => {
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
       const speed = element.dataset.speed || 0.5;
       const yPos = -(scrolled * speed);
       element.style.transform = `translateY(${yPos}px)`;
@@ -284,11 +372,18 @@ function initParallax() {
 // Debounce function
 function debounce(func, wait) {
   let timeout;
+<<<<<<< HEAD
   return function executedFunction() {
     const args = arguments;
     const later = function() {
       clearTimeout(timeout);
       func.apply(null, args);
+=======
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
     };
     clearTimeout(timeout);
     timeout = setTimeout(later, wait);
@@ -304,7 +399,11 @@ function throttle(func, limit) {
     if (!inThrottle) {
       func.apply(context, args);
       inThrottle = true;
+<<<<<<< HEAD
       setTimeout(function() { inThrottle = false; }, limit);
+=======
+      setTimeout(() => inThrottle = false, limit);
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
     }
   };
 }
@@ -316,6 +415,7 @@ window.TravelUtils = {
   openModal,
   closeModal,
   debounce,
+<<<<<<< HEAD
   throttle,
   openDetailsModal,
   openBlogModal
@@ -455,3 +555,7 @@ function createDetailsModal() {
 window.openBlogModal = openBlogModal;
 window.openDetailsModal = openDetailsModal;
 window.closeDetailsModal = closeDetailsModal;
+=======
+  throttle
+};
+>>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7

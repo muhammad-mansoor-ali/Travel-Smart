@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Share your feedback with Travel Smart. Help us improve your travel experience.">
+  <title>Travel Smart - Feedback</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://kit.fontawesome.com/747f67b7cc.js" crossorigin="anonymous"></script>
+  <style>
+    .feedback-hero {
+      position: relative;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+    
+    .feedback-hero .hero-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      z-index: -2;
+    }
+    
+    .feedback-hero .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(14, 165, 161, 0.8) 0%, rgba(14, 138, 147, 0.9) 100%);
+      z-index: -1;
+    }
+    
+    .feedback-hero .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      padding: var(--spacing-xl);
+    }
+    
+    .feedback-form-container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: var(--spacing-xl) 0;
+    }
+    
+    .form-section {
+      background: var(--card);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .form-section h3 {
+      color: var(--dark);
+      margin-bottom: var(--spacing-md);
+      padding-bottom: var(--spacing-sm);
+      border-bottom: 2px solid var(--bg);
+    }
+    
+    .rating-section {
+      text-align: center;
+      padding: var(--spacing-lg) 0;
+    }
+    
+    .rating-label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: var(--spacing-md);
+      color: var(--dark);
+      font-size: 1.1rem;
+    }
+    
+    .star-rating {
+      justify-content: center;
+      direction: ltr;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .star-rating label {
+      font-size: 2.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+      padding: 0 var(--spacing-xs);
+    }
+    
+    .star-rating label:hover {
+      transform: scale(1.2);
+    }
+    
+    .rating-text {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: var(--spacing-xs);
+      min-height: 24px;
+    }
+    
+    .form-group {
+      position: relative;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      transition: var(--transition);
+    }
+    
+    .form-group input.error,
+    .form-group textarea.error,
+    .form-group select.error {
+      border-color: #ef4444;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+    }
+    
+    .form-group .error-message {
+      color: #ef4444;
+      font-size: 0.875rem;
+      margin-top: var(--spacing-xs);
+      display: none;
+      animation: slideIn 0.3s ease-out;
+    }
+    
+    .form-group.error .error-message {
+      display: block;
+    }
+    
+    .success-message {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white;
+      padding: var(--spacing-lg);
+      border-radius: var(--radius);
+      text-align: center;
+      margin-top: var(--spacing-lg);
+      display: none;
+      animation: scaleIn 0.5s ease-out;
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .success-message.active {
+      display: block;
+    }
+    
+    .success-message i {
+      font-size: 3rem;
+      margin-bottom: var(--spacing-sm);
+      display: block;
+      animation: float 2s ease-in-out infinite;
+    }
+    
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-sm);
+    }
+    
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      padding: var(--spacing-sm);
+      background: var(--bg);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: var(--transition);
+      flex: 1;
+      min-width: 150px;
+    }
+    
+    .checkbox-item:hover {
+      background: var(--primary-light);
+      color: white;
+    }
+    
+    .checkbox-item input[type="checkbox"] {
+      width: auto;
+      margin: 0;
+    }
+    
+    .checkbox-item input[type="checkbox"]:checked + label {
+      font-weight: 600;
+      color: var(--primary);
+    }
+    
+    .checkbox-item:hover input[type="checkbox"]:checked + label {
+      color: white;
+    }
+    
+    .submit-btn-container {
+      text-align: center;
+      margin-top: var(--spacing-xl);
+    }
+    
+    .btn-submit {
+      padding: 1rem 3rem;
+      font-size: 1.1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-submit::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    
+    .btn-submit:active::before {
+      width: 300px;
+      height: 300px;
+    }
+    
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      transform: scale(1.01);
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <nav class="container inner">
+      <div class="logo" onclick="location.href='index.html'">
+        <div class="icon">TS</div>
+        <div>TRAVEL <strong>SMART</strong></div>
+      </div>
+      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav">
+        <li><a href="index.html" class="btn">Home</a></li>
+        <li><a href="catalog.html" class="btn">Destinations</a></li>
+        <li><a href="packages.html" class="btn">Packages</a></li>
+        <li><a href="about.html" class="btn">About</a></li>
+        <li><a href="contact.html" class="btn">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="feedback-hero">
+    <div class="hero-image" style="background-image: url('assets/img.jpg');"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 style="color: white; margin-bottom: var(--spacing-sm);">Share Your Feedback</h1>
+      <p style="color: rgba(255,255,255,0.95); font-size: 1.1rem;">
+        Your opinion matters! Help us improve your travel experience by sharing your thoughts.
+      </p>
+    </div>
+  </section>
+
+  <!-- Feedback Form -->
+  <section class="section">
+    <div class="container feedback-form-container">
+      <form id="feedbackForm" class="form-section fade-in">
+        <!-- Rating Section -->
+        <div class="rating-section">
+          <label class="rating-label">How would you rate your experience?</label>
+          <div class="star-rating">
+            <input type="radio" id="star5" name="rating" value="5" required>
+            <label for="star5" title="Excellent">★</label>
+            <input type="radio" id="star4" name="rating" value="4">
+            <label for="star4" title="Very Good">★</label>
+            <input type="radio" id="star3" name="rating" value="3">
+            <label for="star3" title="Good">★</label>
+            <input type="radio" id="star2" name="rating" value="2">
+            <label for="star2" title="Fair">★</label>
+            <input type="radio" id="star1" name="rating" value="1">
+            <label for="star1" title="Poor">★</label>
+          </div>
+          <div class="rating-text" id="ratingText"></div>
+        </div>
+
+        <!-- Personal Information -->
+        <div class="form-section">
+          <h3><i class="fas fa-user"></i> Personal Information</h3>
+          
+          <div class="form-group floating-label">
+            <input type="text" id="fbName" name="name" placeholder=" " required>
+            <label for="fbName">Full Name *</label>
+            <div class="error-message">Please enter your name</div>
+          </div>
+          
+          <div class="form-group floating-label">
+            <input type="email" id="fbEmail" name="email" placeholder=" " required>
+            <label for="fbEmail">Email Address *</label>
+            <div class="error-message">Please enter a valid email address</div>
+          </div>
+          
+          <div class="form-group floating-label">
+            <input type="tel" id="fbPhone" name="phone" placeholder=" ">
+            <label for="fbPhone">Phone Number (Optional)</label>
+          </div>
+        </div>
+
+        <!-- Travel Experience -->
+        <div class="form-section">
+          <h3><i class="fas fa-plane"></i> Travel Experience</h3>
+          
+          <div class="form-group">
+            <label for="fbDestination">Which destination did you visit?</label>
+            <select id="fbDestination" name="destination">
+              <option value="">Select a destination</option>
+              <option value="maldives">Maldives</option>
+              <option value="paris">Paris, France</option>
+              <option value="swiss-alps">Swiss Alps</option>
+              <option value="tokyo">Tokyo</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label>What type of travel experience was this? (Select all that apply)</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="type1" name="travelType" value="beach">
+                <label for="type1">Beach Vacation</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="type2" name="travelType" value="adventure">
+                <label for="type2">Adventure</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="type3" name="travelType" value="city">
+                <label for="type3">City Break</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="type4" name="travelType" value="mountain">
+                <label for="type4">Mountain</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="type5" name="travelType" value="cultural">
+                <label for="type5">Cultural</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="type6" name="travelType" value="luxury">
+                <label for="type6">Luxury</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feedback Message -->
+        <div class="form-section">
+          <h3><i class="fas fa-comment"></i> Your Feedback</h3>
+          
+          <div class="form-group floating-label">
+            <textarea id="fbMessage" name="message" rows="6" placeholder=" " required></textarea>
+            <label for="fbMessage">Tell us about your experience *</label>
+            <div class="error-message">Please share your feedback</div>
+          </div>
+          
+          <div class="form-group">
+            <label>What could we improve? (Optional)</label>
+            <textarea id="fbImprovements" name="improvements" rows="4" placeholder="Share your suggestions for improvement..."></textarea>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="submit-btn-container">
+          <button type="submit" class="btn btn-large btn-submit">
+            <i class="fas fa-paper-plane"></i> Submit Feedback
+          </button>
+        </div>
+      </form>
+
+      <!-- Success Message -->
+      <div class="success-message" id="successMessage">
+        <i class="fas fa-check-circle"></i>
+        <h3 style="color: white; margin-bottom: var(--spacing-sm);">Thank You!</h3>
+        <p style="color: rgba(255,255,255,0.95);">Your feedback has been received. We appreciate you taking the time to help us improve!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-section">
+          <h4>Find Us</h4>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> Office #32, Model Colony, Karachi</li>
+            <li><i class="fas fa-phone"></i> +92-9999878398</li>
+            <li><i class="fas fa-envelope"></i> travel@smart.com.pk</li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="catalog.html">Destinations</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="feedback.html">Feedback</a></li>
+            <li><a href="review.html">Reviews</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Follow Us</h4>
+          <div class="social-icons">
+            <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://x.com/" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Travel Smart. All rights reserved. | Designed by M & M | <a href="#" style="color: rgba(255,255,255,0.7);">Privacy Policy</a></p>
+    </div>
+  </footer>
+
+  <script src="js/utils.js"></script>
+  <script>
+    // Star rating functionality
+    const starInputs = document.querySelectorAll('.star-rating input');
+    const ratingText = document.getElementById('ratingText');
+    const ratingMessages = {
+      5: 'Excellent! We\'re thrilled you had an amazing experience!',
+      4: 'Very Good! Thank you for your positive feedback!',
+      3: 'Good! We appreciate your feedback.',
+      2: 'Fair. We\'d love to hear how we can improve.',
+      1: 'We\'re sorry to hear that. Please let us know how we can do better.'
+    };
+
+    starInputs.forEach(input => {
+      input.addEventListener('change', () => {
+        const rating = parseInt(input.value);
+        ratingText.textContent = ratingMessages[rating];
+        ratingText.style.color = rating >= 4 ? '#10b981' : rating >= 3 ? '#f59e0b' : '#ef4444';
+        
+        // Update star colors
+        const labels = document.querySelectorAll('.star-rating label');
+        labels.forEach((label, index) => {
+          if (index < rating) {
+            label.style.color = '#f59e0b';
+          } else {
+            label.style.color = 'var(--border)';
+          }
+        });
+      });
+    });
+
+    // Form validation with animations
+    const form = document.getElementById('feedbackForm');
+    const successMessage = document.getElementById('successMessage');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Remove previous error states
+      document.querySelectorAll('.form-group').forEach(group => {
+        group.classList.remove('error');
+        const input = group.querySelector('input, textarea, select');
+        if (input) input.classList.remove('error');
+      });
+
+      let isValid = true;
+
+      // Validate required fields
+      const requiredFields = form.querySelectorAll('[required]');
+      requiredFields.forEach(field => {
+        const formGroup = field.closest('.form-group');
+        if (!field.value.trim()) {
+          isValid = false;
+          formGroup.classList.add('error');
+          field.classList.add('error');
+          
+          // Animate error
+          field.style.animation = 'none';
+          setTimeout(() => {
+            field.style.animation = 'shake 0.5s ease-in-out';
+          }, 10);
+        }
+      });
+
+      // Validate email format
+      const email = document.getElementById('fbEmail');
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (email.value && !emailRegex.test(email.value)) {
+        isValid = false;
+        email.closest('.form-group').classList.add('error');
+        email.classList.add('error');
+      }
+
+      if (isValid) {
+        // Show success message
+        successMessage.classList.add('active');
+        form.style.opacity = '0.5';
+        form.style.pointerEvents = 'none';
+        
+        // Scroll to success message
+        successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Reset form after delay
+        setTimeout(() => {
+          form.reset();
+          form.style.opacity = '1';
+          form.style.pointerEvents = 'auto';
+          
+          // Reset star colors
+          document.querySelectorAll('.star-rating label').forEach(label => {
+            label.style.color = 'var(--border)';
+          });
+          ratingText.textContent = '';
+          
+          // Hide success message after 5 seconds
+          setTimeout(() => {
+            successMessage.classList.remove('active');
+          }, 5000);
+        }, 2000);
+      } else {
+        // Scroll to first error
+        const firstError = form.querySelector('.form-group.error');
+        if (firstError) {
+          firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    });
+
+    // Real-time validation
+    form.querySelectorAll('input, textarea').forEach(field => {
+      field.addEventListener('blur', () => {
+        const formGroup = field.closest('.form-group');
+        if (field.hasAttribute('required') && !field.value.trim()) {
+          formGroup.classList.add('error');
+          field.classList.add('error');
+        } else {
+          formGroup.classList.remove('error');
+          field.classList.remove('error');
+        }
+      });
+
+      field.addEventListener('input', () => {
+        const formGroup = field.closest('.form-group');
+        if (field.value.trim()) {
+          formGroup.classList.remove('error');
+          field.classList.remove('error');
+        }
+      });
+    });
+
+    // Add shake animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-10px); }
+        75% { transform: translateX(10px); }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
