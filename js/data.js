@@ -14,7 +14,7 @@ window.TRAVEL_DATA = [
   {id:12,name:'Costa Rica Eco-Adventure',type:'adventure',price:1099,popularity:88,rating:4.7,duration:8,hero:'assets/rica.avif',description:'Zip-lining, rainforest treks, and wildlife spotting in Costa Rica.'},
   {id:13,name:'Sahara Desert Expedition',type:'adventure',price:899,popularity:83,rating:4.6,duration:6,hero:'assets/desert.jpg',description:'Camel treks and camping under the stars in the Sahara.'},
   {id:14,name:'Nordic Northern Lights',type:'mountain',price:1899,popularity:92,rating:4.9,duration:7,hero:'assets/aurora.avif',description:'Chase the Aurora Borealis and stay in a glass igloo.'},
-  {id:15,name:'Swiss Alps Skiing',type:'mountain',price:2199,popularity:94,rating:4.9,duration:7,hero:'assets/destination.webp',description:'World-class skiing and cozy chalets in the Swiss Alps.'},
+  {id:15,name:'Swiss Alps Skiing',type:'mountain',price:2199,popularity:94,rating:4.9,duration:7,hero:'assets/sem_swiss_alps.png',description:'World-class skiing and cozy chalets in the Swiss Alps.'},
   {id:16,name:'New York City Break',type:'city',price:1299,popularity:96,rating:4.7,duration:5,hero:'assets/city.avif',description:'Experience the Big Apple with Broadway shows and fine dining.'},
   {id:17,name:'African Safari',type:'adventure',price:2499,popularity:89,rating:4.9,duration:10,hero:'assets/desertsafari.jpg',description:'Witness the majesty of African wildlife in their natural habitat.'},
   {id:18,name:'Kyoto Cherry Blossoms',type:'city',price:1699,popularity:91,rating:4.8,duration:8,hero:'assets/tokyo.jpg',description:'Walk through blooming cherry blossom tunnels in historic Kyoto.'}

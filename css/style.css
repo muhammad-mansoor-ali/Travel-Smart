@@ -259,7 +259,6 @@ a {
   box-shadow: var(--shadow-lg);
 }
 
-<<<<<<< HEAD
 /* Stats */
 .stat-number {
   color: var(--primary); 
@@ -288,8 +287,6 @@ a {
     box-shadow: var(--shadow-md);
 }
 
-=======
->>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
 /* Hero Section */
 .hero {
   position: relative;
@@ -355,7 +352,6 @@ a {
   width: 100%;
   box-shadow: var(--shadow-xl);
   animation: fadeInUp 1s ease-out 0.6s both;
-<<<<<<< HEAD
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -409,8 +405,6 @@ a {
 @keyframes scrollWheel {
   0% { top: 8px; opacity: 1; }
   100% { top: 30px; opacity: 0; }
-=======
->>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
 }
 
 .search-form {
@@ -499,7 +493,6 @@ a {
 }
 
 .destination-card:hover {
-<<<<<<< HEAD
   transform: translateY(-15px) scale(1.03);
   box-shadow: var(--shadow-xl);
 }
@@ -509,12 +502,6 @@ a {
   transform: translateY(-2px);
 }
 
-=======
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: var(--shadow-xl);
-}
-
->>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
 .destination-image {
   width: 100%;
   height: 250px;
@@ -668,7 +655,6 @@ a {
   border-color: var(--primary);
   background: rgba(255, 255, 255, 0.15);
 }
-<<<<<<< HEAD
 
 /* Special Offers */
 .offer-card {
@@ -787,8 +773,6 @@ a {
 .read-more:hover {
   color: var(--primary-dark);
 }
-=======
->>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
 
 /* Forms */
 .form-group {
@@ -1233,7 +1217,6 @@ textarea:focus {
     display: none;
   }
 }
-<<<<<<< HEAD
 
 /* Card Alignment Fixes */
 .card {
@@ -1251,5 +1234,3 @@ textarea:focus {
 .destination-content .btn {
   margin-top: auto;
 }
-=======
->>>>>>> 891e7d81e3e79abec775665ec9b95b9a1bcb8dd7
