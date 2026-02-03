@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="desscription" content="Browse our curated travel packages. Find the perfect package for your next adventure.">
+  <title>Travel Smart - Travel Packages</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://kit.fontawesome.com/747f67b7cc.js" crossorigin="anonymous"></script>
+  <style>
+    .packages-hero {
+      position: relative;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+    
+    .packages-hero .hero-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      z-index: -2;
+    }
+    
+    .packages-hero .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(14, 165, 161, 0.8) 0%, rgba(14, 138, 147, 0.9) 100%);
+      z-index: -1;
+    }
+    
+    .packages-hero .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      padding: var(--spacing-xl);
+    }
+    
+    /* Tour Card Styles from Catalog */
+    .catalog-section {
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .category-header {
+      margin-bottom: var(--spacing-lg);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+
+    .category-icon {
+      font-size: 2rem;
+    }
+
+    .tour-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .tour-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+    }
+    
+    .tour-media {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: var(--transition-slow);
+    }
+    
+    .tour-card:hover .tour-media {
+      transform: scale(1.1);
+    }
+    
+    .tour-body {
+      padding: var(--spacing-md);
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    
+    .tour-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .tour-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-sm);
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    
+    .tour-price {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: var(--spacing-sm) 0;
+    }
+    
+    .tour-rating {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .tour-actions {
+      display: flex;
+      gap: var(--spacing-sm);
+      margin-top: auto;
+    }
+    
+    /* Responsive Grid */
+    .packages-category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--spacing-lg);
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <nav class="container inner">
+      <div class="logo" onclick="location.href='index.html'">
+        <div class="icon">TS</div>
+        <div>TRAVEL <strong>SMART</strong></div>
+      </div>
+      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav">
+        <li><a href="index.html" class="btn">Home</a></li>
+        <li><a href="catalog.html" class="btn">Destinations</a></li>
+        <li><a href="packages.html" class="btn">Packages</a></li>
+        <li><a href="about.html" class="btn">About</a></li>
+        <li><a href="contact.html" class="btn">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="packages-hero">
+    <div class="hero-image" style="background-image: url('assets/img.jpg');"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 style="color: white; margin-bottom: var(--spacing-sm);">Travel Packages</h1>
+      <p style="color: rgba(255,255,255,0.95); font-size: 1.1rem;">
+        Curated experiences for every type of traveler
+      </p>
+    </div>
+  </section>
+
+  <!-- Packages Section -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title fade-in">
+        <h2>Our Travel Packages</h2>
+        <p>Handpicked packages designed to create unforgettable memories</p>
+      </div>
+      
+      <div id="packagesContainer"></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-section">
+          <h4>Find Us</h4>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> Office #32, Model Colony, Karachi</li>
+            <li><i class="fas fa-phone"></i> +92-9999878398</li>
+            <li><i class="fas fa-envelope"></i> travel@smart.com.pk</li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="catalog.html">Destinations</a></li>
+            <li><a href="packages.html">Packages</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Follow Us</h4>
+          <div class="social-icons">
+            <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://x.com/" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Travel Smart. All rights reserved. | Designed by M & M | <a href="#" style="color: rgba(255,255,255,0.7);">Privacy Policy</a></p>
+    </div>
+  </footer>
+
+  <script src="js/utils.js"></script>
+  <script src="js/data.js"></script>
+  <script>
+    // Package types mapping
+    const packageTypes = {
+      'beach': {
+        name: 'Beach Getaways',
+        description: 'Relax on sandy beaches with all-inclusive amenities.',
+        icon: '🏖️'
+      },
+      'mountain': {
+        name: 'Mountain Adventures',
+        description: 'Experience thrilling activities and explore hidden treasures.',
+        icon: '🏔️'
+      },
+      'city': {
+        name: 'City Breaks',
+        description: 'Explore vibrant cities, culture, and cuisine.',
+        icon: '🏙️'
+      },
+      'adventure': {
+        name: 'Adventure Tours',
+        description: 'Thrilling experiences for the bold traveler.',
+        icon: '🧭'
+      }
+    };
+
+    // Group packages by type
+    function groupPackagesByType() {
+      if (!window.TRAVEL_DATA || window.TRAVEL_DATA.length === 0) {
+        return {};
+      }
+
+      const grouped = {};
+      window.TRAVEL_DATA.forEach(pkg => {
+        if (!grouped[pkg.type]) {
+          grouped[pkg.type] = [];
+        }
+        grouped[pkg.type].push(pkg);
+      });
+
+      return grouped;
+    }
+
+    // Render packages
+    function renderPackages() {
+      const container = document.getElementById('packagesContainer');
+      if (!container) return;
+
+      // Check if data is available
+      if (!window.TRAVEL_DATA || window.TRAVEL_DATA.length === 0) {
+        // Retry logic mostly for slow loading or if script order is off
+        const checkData = setInterval(() => {
+          if (window.TRAVEL_DATA && window.TRAVEL_DATA.length > 0) {
+            clearInterval(checkData);
+            renderPackages();
+          }
+        }, 100);
+        
+        setTimeout(() => {
+          clearInterval(checkData);
+          if (!window.TRAVEL_DATA || window.TRAVEL_DATA.length === 0) {
+            container.innerHTML = '<div class="card" style="text-align: center; padding: var(--spacing-xl);"><h3>Loading packages...</h3></div>';
+          }
+        }, 3000);
+        return;
+      }
+
+      const grouped = groupPackagesByType();
+      let html = '';
+
+      // Create a section for each type
+      Object.keys(packageTypes).forEach(type => {
+        if (grouped[type] && grouped[type].length > 0) {
+          const typeInfo = packageTypes[type];
+          const packages = grouped[type];
+
+          html += `
+            <div class="catalog-section">
+              <div class="category-header">
+                <div class="category-icon">${typeInfo.icon}</div>
+                <div>
+                  <h3 style="margin:0;">${typeInfo.name}</h3>
+                  <p style="margin:0; font-size: 0.9rem;">${typeInfo.description}</p>
+                </div>
+              </div>
+              
+              <div class="packages-category-grid">
+                ${packages.map(p => `
+                  <article class="tour-card fade-in">
+                    <img src="${p.hero}" alt="${p.name}" class="tour-media" loading="lazy">
+                    <div class="tour-body">
+                      <h3 class="tour-title">${p.name}</h3>
+                      <div class="tour-meta">
+                        <span><i class="fas fa-calendar"></i> ${p.duration} days</span>
+                        <span><i class="fas fa-star"></i> ${p.rating}</span>
+                      </div>
+                      <div class="tour-price">$${p.price}</div>
+                      <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: var(--spacing-md); flex: 1;">
+                        ${p.description}
+                      </p>
+                      <div class="tour-actions">
+                        <button onclick="openDetailsModal(${p.id})" class="btn btn-secondary" style="flex: 1; text-align: center;">
+                          View Details
+                        </button>
+                        <a href="contact.html?package=${p.id}" class="btn" style="flex: 1; text-align: center;">
+                          Book Now
+                        </a>
+                      </div>
+                    </div>
+                  </article>
+                `).join('')}
+              </div>
+            </div>
+            <hr style="border: 0; border-top: 1px solid var(--border); margin: var(--spacing-xl) 0;">
+          `;
+        }
+      });
+
+      // Remove the last HR
+      if (html.endsWith('<hr style="border: 0; border-top: 1px solid var(--border); margin: var(--spacing-xl) 0;">')) {
+        html = html.substring(0, html.lastIndexOf('<hr'));
+      }
+
+      // If no packages, show message
+      if (!html) {
+        html = '<div class="card" style="text-align: center; padding: var(--spacing-xl);"><h3>No packages available</h3><p>Please check back later</p></div>';
+      }
+
+      container.innerHTML = html;
+
+      // Initialize scroll animations for new elements
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      container.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    }
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+      renderPackages();
+    });
+  </script>
+</body>
+</html>

@@ -3,11 +3,11 @@
   // small helpers
   window.cap = s => s.charAt(0).toUpperCase()+s.slice(1);
   window.emojiFor = type=>{
-    if(type==='beach') return '🏖️';
-    if(type==='mountain') return '🏔️';
-    if(type==='city') return '🏙️';
-    if(type==='adventure') return '🧭';
-    return '✈️';
+    if(type==='beach') return '';
+    if(type==='mountain') return '';
+    if(type==='city') return '';
+    if(type==='adventure') return '';
+    return '';
   };
 
   // Render catalog - expects certain DOM elements to exist
@@ -41,7 +41,6 @@
     container.innerHTML = results.length ? results.map(p=>`
       <article class="tour-card">
         <div class="tour-media" style="background-image: linear-gradient(rgba(0,0,0,0.08), rgba(0,0,0,0.02)), url('${p.hero}'); background-size:cover; background-position:center;">
-          <div style="font-size:34px;padding:8px;background:rgba(255,255,255,0.85);border-radius:8px;">${emojiFor(p.type)}</div>
         </div>
         <div class="tour-body">
           <div style="display:flex;justify-content:space-between;align-items:flex-start">
